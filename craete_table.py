@@ -11,7 +11,6 @@ class PostgresAbc():
             password = os.getenv("DATABASE_PASSWORD")
             )
         self.__cursor=self.__connection.cursor()
-        self.create_table()
         
     def create_table(self):
         self.__cursor.execute(""" 
