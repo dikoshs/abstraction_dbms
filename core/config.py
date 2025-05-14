@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     @property
     async def DATABASE_URL_mongodb(self):
-        self.reload_env()
+        await self.reload_env()
         return f"mongodb://{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
 
 settings = Settings()
