@@ -10,11 +10,11 @@ class Settings(BaseSettings):
     DB_PORT: str 
     DB_HOST: str 
     
-    def reload_env(self):
+    async def reload_env(self):
         load_dotenv(override=True)
 
     @property
-    def DATABASE_URL_mongodb(self):
+    async def DATABASE_URL_mongodb(self):
         self.reload_env()
         return f"mongodb://{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
 

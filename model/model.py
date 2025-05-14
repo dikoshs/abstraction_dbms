@@ -1,17 +1,18 @@
 from beanie import Document
+from pydantic import Field
 
-class User(Document):
-    name: str
+class record(Document):
+    name: str = Field(max_length=20, min_length=1)
 
     class Config:
         json_schema_extra = {
-            "user": {
+            "record": {
                 "name": "Adam",
             }
         }
 
     class Settings:
-        name = "users"
+        name = "records"
 
 
-__all__ = ["User"]
+__all__ = ["record"]

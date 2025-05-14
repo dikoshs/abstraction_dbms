@@ -1,34 +1,52 @@
 from abc import ABC, abstractmethod
+from database.database import MongoDBinitialization
 
 class MongodbABC(ABC):
+    async def __init__(self, db_name: str):
+        self.db_name = db_name
+        
     @abstractmethod
-    def create(self):
+    async def select(self, column: list, database: str, table: str, query):
         pass
 
     @abstractmethod
-    def update(self):
+    async def insert(self, column: list, database: str, table: str, query):
         pass
 
     @abstractmethod
-    def delete(self):
+    async def update(self, column: list, database: str, table: str, query):
         pass
+
+    @abstractmethod
+    async def delete(self, column: list, database: str, table: str, query):
+        pass
+
+    async def log(self, message: str):
+        print(f"[{self.db_name}] {message}")
 
 
 class Mongodb(MongodbABC):
-    def ff(self):
-        print("DDDDDDDDDD------")
+    async def __init__(self):
+        super().__init__(db_name="MongoDB")
+        self._connection = MongoDBinitialization()
 
-    def create(self):
-        print("create")
+    async def select(self, column: list, database: str, table: str, query):
+        print("SELECT")
     
-    def update(self):
-        print("update")
+    async def insert(self, column: list, database: str, table: str, query):
+        print("INSERT")    
 
-    def delete(self):
-        print("delete")
+    async def update(self, column: list, database: str, table: str, query):
+        print("UPDATE")
+
+    async def delete(self, column: list, database: str, table: str, query):
+        print("DELETE")
     
 
-mongodb = Mongodb()
-mongodb.create()
-mongodb.update()
-mongodb.delete()
+if __name__ == '__main__':
+    mongodb = Mongodb()
+
+    mongodb.select(column=[], database="database", table="table", query="asd")
+    mongodb.insert(column=[], database="database", table="table", query="asd")
+    mongodb.update(column=[], database="database", table="table", query="asd")
+    mongodb.delete(column=[], database="database", table="table", query="asd")
